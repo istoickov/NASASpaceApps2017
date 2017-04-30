@@ -26,15 +26,16 @@ namespace NASAapp
             functions = new Functions();
             img = new List<Image>();
             objects = functions.ParseJSON("all");
-        }
+            btnAbout.BackColor = System.Drawing.ColorTranslator.FromHtml("#a2ce6c");
+            }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void btnAbout_Click(object sender, EventArgs e)
-        {
+        private void btnAbout_Click(object sender, EventArgs e) {
+
             panelAbout.Visible = true;
             panelAddNewLocation.Visible = false;
             panelAddNewLandslide.Visible = false;
@@ -42,11 +43,11 @@ namespace NASAapp
 
             listBox2.Items.Clear();
             listBox4.Items.Clear();
-
+            
             btnAbout.BackColor=System.Drawing.ColorTranslator.FromHtml("#a2ce6c");
-            buttonAddNewLocation.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
-            buttonNearby.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
-            btnAddNewLandslide.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
+            buttonAddNewLocation.BackColor = System.Drawing.ColorTranslator.FromHtml("133, 191, 68");
+            buttonNearby.BackColor = System.Drawing.ColorTranslator.FromHtml("133, 191, 68");
+            btnAddNewLandslide.BackColor = System.Drawing.ColorTranslator.FromHtml("133, 191, 68");
 
         }
 
@@ -57,10 +58,10 @@ namespace NASAapp
             panelAddNewLandslide.Visible = false;
             panelNearby.Visible = false;
 
-            btnAbout.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
-            buttonAddNewLocation.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
-            buttonNearby.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
-            btnAddNewLandslide.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
+            btnAbout.BackColor = System.Drawing.ColorTranslator.FromHtml("133, 191, 68");
+            buttonAddNewLocation.BackColor = System.Drawing.ColorTranslator.FromHtml("#a2ce6c");
+            buttonNearby.BackColor = System.Drawing.ColorTranslator.FromHtml("133, 191, 68");
+            btnAddNewLandslide.BackColor = System.Drawing.ColorTranslator.FromHtml("133, 191, 68");
         }
 
         private void btnAddNewLandslide_Click(object sender, EventArgs e)
@@ -72,9 +73,9 @@ namespace NASAapp
 
             listBox2.Items.Clear();
 
-            btnAbout.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
-            buttonAddNewLocation.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
-            buttonNearby.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
+            btnAbout.BackColor = System.Drawing.ColorTranslator.FromHtml("133, 191, 68");
+            buttonAddNewLocation.BackColor = System.Drawing.ColorTranslator.FromHtml("133, 191, 68");
+            buttonNearby.BackColor = System.Drawing.ColorTranslator.FromHtml("133, 191, 68");
             btnAddNewLandslide.BackColor = System.Drawing.ColorTranslator.FromHtml("#a2ce6c");
         }
 
@@ -134,84 +135,24 @@ namespace NASAapp
             string latitude;
             string longitude;
             string location = textBox1.Text;
-            if (!checkBox1.Checked)
-            {
-                latitude = textBox6.Text;
-                longitude = textBox7.Text;
-                List<RootObject> RootObjects = functions.nearby(this.RootObjects, 250, latitude, longitude);
-            }
-            else
-            {
-                string tmp = functions.GetLocation(functions.MyIP());
-                latitude = tmp.Split(' ')[0];
-                longitude = tmp.Split(' ')[1];
-                List<RootObject> RootObjects = functions.nearby(this.RootObjects, 250, functions.GetLocation(functions.MyIP()).Split(' ')[0], functions.GetLocation(functions.MyIP()).Split(' ')[1]);
-            }
+            
+            latitude = textBox6.Text;
+            longitude = textBox7.Text;
+            List<RootObject> RootObjects = functions.nearby(this.RootObjects, 250, latitude, longitude);
+            
             added.Add(new RootObject(location, latitude, longitude));
-        }
+            textBox5.Text = "";
+            textBox6.Text = "";
+            textBox7.Text = "";
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked)
-            {
-                textBox6.Text = "";
-                textBox7.Text = "";
-                textBox6.ReadOnly = true;
-                textBox7.ReadOnly = true;
-            }
-            else
-            {
-                textBox6.Text = "Add latitude..";
-                textBox7.Text = "Add longitude..";
-                textBox6.ReadOnly = false;
-                textBox7.ReadOnly = false;
-            }
+            pictureBox1.Image = null;
         }
-
-        private void btnAbout_MouseHover(object sender, EventArgs e)
-        {
-            btnAbout.BackColor = System.Drawing.ColorTranslator.FromHtml("#a2ce6c");
-            buttonAddNewLocation.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
-            buttonNearby.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
-            btnAddNewLandslide.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
-        }
-
-        private void buttonCurrentLocation_MouseHover(object sender, EventArgs e)
-        {
-            btnAbout.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
-            buttonAddNewLocation.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
-            buttonNearby.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
-            btnAddNewLandslide.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
-        }
-
-        private void buttonAddNewLocation_MouseHover(object sender, EventArgs e)
-        {
-            btnAbout.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
-            buttonAddNewLocation.BackColor = System.Drawing.ColorTranslator.FromHtml("#a2ce6c");
-            buttonNearby.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
-            btnAddNewLandslide.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
-        }
-
-        private void buttonNearby_MouseHover(object sender, EventArgs e)
-        {
-            btnAbout.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
-            buttonAddNewLocation.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
-            buttonNearby.BackColor = System.Drawing.ColorTranslator.FromHtml("#a2ce6c");
-            btnAddNewLandslide.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
-        }
-
-        private void btnAddNewLandslide_MouseHover(object sender, EventArgs e)
-        {
-            btnAbout.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
-            buttonAddNewLocation.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
-            buttonNearby.BackColor = System.Drawing.ColorTranslator.FromHtml("#85bf44");
-            btnAddNewLandslide.BackColor = System.Drawing.ColorTranslator.FromHtml("#a2ce6c");
-        }
-
-        
 
         private void btnDismiss_Click(object sender, EventArgs e)
         {
+            pictureBox1.Image = null;
+            checkBox2.Checked = false;
+
             panelAbout.Visible = true;
             panelAddNewLocation.Visible = false;
             panelAddNewLandslide.Visible = false;

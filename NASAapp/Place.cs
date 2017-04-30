@@ -121,7 +121,7 @@ namespace NASAapp
 
         public override string ToString()
         {
-            return String.Format("Date: {0} Country: {1} Hazard type: {2} Geolocation: {3}", this.date.Substring(0,10) , this.countryname, this.hazard_type, this.geolocation);
+            return String.Format("Date: {0} Country: {1} Geolocation: {2}", this.date.Substring(0,10) , this.countryname, this.geolocation);
         }
     }
 }
